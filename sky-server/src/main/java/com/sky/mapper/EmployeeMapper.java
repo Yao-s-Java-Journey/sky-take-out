@@ -15,4 +15,11 @@ public interface EmployeeMapper {
     @Select("select * from employee where username = #{username}")
     Employee getByUsername(String username);
 
+    /**
+     * 插入员工数据
+     * @param employee
+     * @return
+     */
+    @Select("insert into employee values (null, #{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
+    void insert(Employee employee);
 }

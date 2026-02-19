@@ -59,6 +59,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     /**
      * 设置静态资源映射
+     * 访问 http://localhost:8080/doc.html 查阅接口文档
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
