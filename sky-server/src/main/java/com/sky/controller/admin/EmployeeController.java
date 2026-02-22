@@ -107,4 +107,15 @@ public class EmployeeController {
         employeeService.enableOrDisable(status, id);
         return Result.success();
     }
+
+    /**
+     * 根据 id 查询员工详情
+     */
+    @ApiOperation("员工详情查询")
+    @GetMapping("/{id}")
+    public Result<Employee> getById(@PathVariable Long id) {
+        log.info("查询员工详情：id={}", id);
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
+    }
 }
