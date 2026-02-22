@@ -27,4 +27,12 @@ public interface EmployeeService {
      * 分页查询
      */
     PageResult page(EmployeePageQueryDTO dto);
+
+    /**
+     * 启用禁用员工账号
+     *
+     * @param status
+     * @param id
+     */
+    void enableOrDisable(Integer status, Long id);
 }

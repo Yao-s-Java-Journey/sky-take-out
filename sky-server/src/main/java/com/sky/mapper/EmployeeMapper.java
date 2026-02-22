@@ -10,6 +10,7 @@ public interface EmployeeMapper {
 
     /**
      * 根据用户名查询员工
+     *
      * @param username
      * @return
      */
@@ -18,6 +19,7 @@ public interface EmployeeMapper {
 
     /**
      * 插入员工数据
+     *
      * @param employee
      * @return
      */
@@ -26,8 +28,17 @@ public interface EmployeeMapper {
 
     /**
      * 分页查询
+     *
      * @param name
      * @return
      */
     Page<Employee> list(String name);
+
+    /**
+     * 员工更新
+     *
+     * @param employee
+     * @return
+     */
+    void update(Employee employee);
 }
