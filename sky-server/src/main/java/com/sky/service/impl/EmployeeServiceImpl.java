@@ -145,4 +145,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword("****");
         return employee;
     }
+
+    /**
+     * 编辑员工信息
+     *
+     * @param dto
+     */
+    @Override
+    public void update(EmployeeDTO dto) {
+        // 申明一个完整的 Employee 对象
+        Employee employee = new Employee();
+
+        // 将 dto 对象属性拷贝至 employee 中
+        BeanUtils.copyProperties(dto, employee);
+
+        // 补全其他必要的属性
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.update(employee);
+    }
 }
