@@ -4,6 +4,21 @@
 <mapper namespace="com.sky.mapper.CategoryMapper">
     <!-- 新增菜品分类 -->
     <insert id="add">
-        insert into category values (null, #{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+        insert into category
+        values (null, #{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
+
+    <!-- 菜品分页查询 -->
+    <select id="pageQuery" resultType="com.sky.entity.Category">
+        select * from category
+        <where>
+            <if test="name != null and name != ''">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+        order by sort, create_time desc
+    </select>
 </mapper>

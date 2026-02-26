@@ -1,10 +1,14 @@
 package com.sky.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sky.constant.StatusConstant;
 import com.sky.context.BaseContext;
 import com.sky.dto.CategoryDTO;
+import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.mapper.CategoryMapper;
+import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @param dto
      */
+    @Override
     public void addCategory(CategoryDTO dto) {
         // 创建一个Category对象，用于封装数据
         Category category = new Category();
@@ -40,5 +45,16 @@ public class CategoryServiceImpl implements CategoryService {
 
         // 插入数据库
         categoryMapper.add(category);
+    }
+
+    @Override
+    public PageResult page(CategoryPageQueryDTO dto) {
+        // 1. 使用 PageHelper 插件开启分页，配置分页参数
+        PageHelper.startPage(dto.getPage(), dto.getPageSize());
+
+        // 2. 调用 mapper 列表查询
+        Page<Category> page= categoryMapper.pageQuery(dto);
+
+        return new PageResult(page.getTotal(), page.getResult());
     }
 }
