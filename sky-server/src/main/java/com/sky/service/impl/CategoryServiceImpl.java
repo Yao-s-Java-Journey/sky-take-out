@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
     private SetmealMapper setmealMapper;
 
     /**
-     * 新增分类
+     * 新增菜品分类
      *
      * @param dto
      */
@@ -57,6 +57,12 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.add(category);
     }
 
+    /**
+     * 菜品分类分页查询
+     *
+     * @param dto
+     * @return
+     */
     @Override
     public PageResult page(CategoryPageQueryDTO dto) {
         // 1. 使用 PageHelper 插件开启分页，配置分页参数
@@ -69,7 +75,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     /**
-     * 删除分类
+     * 删除菜品分类
      *
      * @param id
      */
@@ -91,5 +97,23 @@ public class CategoryServiceImpl implements CategoryService {
 
         // 3. 删除分类
         categoryMapper.deleteById(id);
+    }
+
+    /**
+     * 编辑菜品分类
+     *
+     * @param categoryDTO
+     */
+    @Override
+    public void update(CategoryDTO categoryDTO) {
+        // 申明 category 对象，拷贝 dto 属性
+        Category category = new Category();
+        BeanUtils.copyProperties(categoryDTO, category);
+
+        // 设置修改时间、修改人
+        category.setUpdateTime(LocalDateTime.now());
+        category.setUpdateUser(BaseContext.getCurrentId());
+
+        categoryMapper.update(category);
     }
 }

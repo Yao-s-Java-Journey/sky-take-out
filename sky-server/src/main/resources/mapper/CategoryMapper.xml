@@ -8,6 +8,29 @@
         values (null, #{type}, #{name}, #{sort}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
+    <!-- 编辑菜品分类-->
+    <update id="update">
+        update category
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
     <!-- 菜品分页查询 -->
     <select id="pageQuery" resultType="com.sky.entity.Category">
         select * from category

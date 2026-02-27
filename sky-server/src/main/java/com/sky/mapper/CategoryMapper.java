@@ -1,6 +1,7 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.result.PageResult;
@@ -28,4 +29,10 @@ public interface CategoryMapper {
      */
     @Delete("delete from category where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 编辑菜品分类
+     * @param category
+     */
+    void update(Category category);
 }

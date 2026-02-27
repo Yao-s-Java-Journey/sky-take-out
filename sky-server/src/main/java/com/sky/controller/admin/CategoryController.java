@@ -39,7 +39,7 @@ public class CategoryController {
     /**
      * 分类分页查询
      */
-    @ApiOperation("新增菜品分类")
+    @ApiOperation("菜品分类分页查询")
     @GetMapping("/page")
     public Result<PageResult> page(CategoryPageQueryDTO dto) {
         log.info("分页查询: {}", dto);
@@ -52,11 +52,25 @@ public class CategoryController {
      * @param id
      * @return
      */
-    @ApiOperation("删除分类")
+    @ApiOperation("删除菜品分类")
     @DeleteMapping
     public Result delete(Long id) {
         log.info("删除分类：{}", id);
         categoryService.deleteById(id);
         return Result.success();
     };
+
+    /**
+     * 编辑分类
+     * @param categoryDTO
+     * @return
+     */
+    @ApiOperation("编辑菜品分类")
+    @PutMapping
+    public Result update(@RequestBody CategoryDTO categoryDTO) {
+        log.info("编辑分类：{}", categoryDTO);
+        categoryService.update(categoryDTO);
+        return Result.success();
+    }
+
 }
