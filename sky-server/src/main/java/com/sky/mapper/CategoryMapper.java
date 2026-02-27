@@ -8,16 +8,20 @@ import com.sky.result.PageResult;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CategoryMapper {
     /**
      * 新增菜品分类
+     *
      * @param category
      */
     void add(Category category);
 
     /**
      * 菜品分类分页查询
+     *
      * @param dto
      * @return
      */
@@ -25,6 +29,7 @@ public interface CategoryMapper {
 
     /**
      * 删除菜品分类
+     *
      * @param id
      */
     @Delete("delete from category where id = #{id}")
@@ -32,7 +37,15 @@ public interface CategoryMapper {
 
     /**
      * 编辑菜品分类
+     *
      * @param category
      */
     void update(Category category);
+
+    /**
+     * 根据类型查询启用的分类
+     *
+     * @param type 菜品类型
+     */
+    List<Category> list(Integer type);
 }

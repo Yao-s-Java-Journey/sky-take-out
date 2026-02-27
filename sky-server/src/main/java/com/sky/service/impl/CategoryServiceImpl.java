@@ -14,12 +14,15 @@ import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -133,5 +136,16 @@ public class CategoryServiceImpl implements CategoryService {
                 .updateUser(BaseContext.getCurrentId())
                 .build();
         categoryMapper.update(category);
+    }
+
+    /**
+     * 根据类型查询菜品分类
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Category> getEnableCategoriesByType(Integer type) {
+        return categoryMapper.list(type);
     }
 }

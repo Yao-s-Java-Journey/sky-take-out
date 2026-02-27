@@ -3,6 +3,7 @@ package com.sky.controller.admin;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.dto.EmployeeDTO;
+import com.sky.entity.Category;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
@@ -11,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 菜品分类管理
@@ -25,6 +28,7 @@ public class CategoryController {
 
     /**
      * 新增分类
+     *
      * @param categoryDTO
      * @return
      */
@@ -49,6 +53,7 @@ public class CategoryController {
 
     /**
      * 删除分类
+     *
      * @param id
      * @return
      */
@@ -58,10 +63,13 @@ public class CategoryController {
         log.info("删除分类：{}", id);
         categoryService.deleteById(id);
         return Result.success();
-    };
+    }
+
+    ;
 
     /**
      * 编辑分类
+     *
      * @param categoryDTO
      * @return
      */
@@ -75,6 +83,7 @@ public class CategoryController {
 
     /**
      * 启用、禁用菜品分类
+     *
      * @param status
      * @param id
      * @return
@@ -85,5 +94,18 @@ public class CategoryController {
         log.info("启用/禁用状态：id={}，status={}", id, status);
         categoryService.startOrStop(status, id);
         return Result.success();
+    }
+
+    /**
+     * 根据类型查询可用的菜品分类
+     *
+     * @param type
+     * @return
+     */
+    @ApiOperation("查询可用的菜品分类")
+    @GetMapping("/list")
+    public Result<List<Category>> list(Integer type) {
+        List<Category> list = categoryService.getEnableCategoriesByType(type);
+        return Result.success(list);
     }
 }

@@ -44,4 +44,13 @@
         </where>
         order by sort, create_time desc
     </select>
+
+    <!-- 根据类型查询启用的菜品分类列表 -->
+    <select id="list" resultType="com.sky.entity.Category">
+        select * from category where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort, create_time desc
+    </select>
 </mapper>
