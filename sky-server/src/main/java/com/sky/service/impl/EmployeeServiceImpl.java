@@ -86,12 +86,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 补全其他必要的属性
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes())); // md5 加密默认密码
         employee.setStatus(StatusConstant.ENABLE);
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        // 从上下文（threadLocal）获取当前登录用户的 id
-        Long currUserId = BaseContext.getCurrentId();
-        employee.setCreateUser(currUserId);
-        employee.setUpdateUser(currUserId);
+
+        // 这部分逻辑已由自定义注解 AutoFill 实现
+        // employee.setCreateTime(LocalDateTime.now());
+        // employee.setUpdateTime(LocalDateTime.now());
+        // // 从上下文（threadLocal）获取当前登录用户的 id
+        // Long currUserId = BaseContext.getCurrentId();
+        // employee.setCreateUser(currUserId);
+        // employee.setUpdateUser(currUserId);
 
         // 插入数据库
         employeeMapper.insert(employee);
@@ -159,9 +161,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 将 dto 对象属性拷贝至 employee 中
         BeanUtils.copyProperties(dto, employee);
 
-        // 补全其他必要的属性
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 这部分逻辑已由自定义注解 AutoFill 实现
+        // // 补全其他必要的属性
+        // employee.setUpdateTime(LocalDateTime.now());
+        // employee.setUpdateUser(BaseContext.getCurrentId());
 
         employeeMapper.update(employee);
     }

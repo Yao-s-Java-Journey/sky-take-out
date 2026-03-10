@@ -49,12 +49,14 @@ public class CategoryServiceImpl implements CategoryService {
 
         // 补全其他属性
         category.setStatus(StatusConstant.ENABLE);
-        category.setCreateTime(LocalDateTime.now());
-        category.setUpdateTime(LocalDateTime.now());
-        // 从上下文（threadLocal）获取当前登录用户的 id
-        Long currUserId = BaseContext.getCurrentId();
-        category.setCreateUser(currUserId);
-        category.setUpdateUser(currUserId);
+
+        // 这部分逻辑已由自定义注解 AutoFill 实现
+        // category.setCreateTime(LocalDateTime.now());
+        // category.setUpdateTime(LocalDateTime.now());
+        // // 从上下文（threadLocal）获取当前登录用户的 id
+        // Long currUserId = BaseContext.getCurrentId();
+        // category.setCreateUser(currUserId);
+        // category.setUpdateUser(currUserId);
 
         // 插入数据库
         categoryMapper.add(category);
@@ -113,9 +115,10 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = new Category();
         BeanUtils.copyProperties(categoryDTO, category);
 
-        // 设置修改时间、修改人
-        category.setUpdateTime(LocalDateTime.now());
-        category.setUpdateUser(BaseContext.getCurrentId());
+        // // 这部分逻辑已由自定义注解 AutoFill 实现
+        // // 设置修改时间、修改人
+        // category.setUpdateTime(LocalDateTime.now());
+        // category.setUpdateUser(BaseContext.getCurrentId());
 
         categoryMapper.update(category);
     }
@@ -132,8 +135,8 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = Category.builder()
                 .id(id)
                 .status(status)
-                .updateTime(LocalDateTime.now())
-                .updateUser(BaseContext.getCurrentId())
+                // .updateTime(LocalDateTime.now()) 这部分逻辑已由自定义注解 AutoFill 实现
+                // .updateUser(BaseContext.getCurrentId()) 这部分逻辑已由自定义注解 AutoFill 实现
                 .build();
         categoryMapper.update(category);
     }
