@@ -38,3 +38,6 @@ log/
 *.tar
 *.tar.gz
 temp/
+
+# Configuration files
+application-dev.yml
